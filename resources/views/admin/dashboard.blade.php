@@ -312,4 +312,5 @@
       </div>
    </div>
 <!-- /.content-wrapper -->
+<script src="{{ asset('') }}backend/js/pages/dashboard.js"></script>
 @endsection

@@ -1,3 +1,6 @@
+@php
+$c_route = Route::getCurrentRoute()->getName();
+@endphp
 <aside class="main-sidebar">
    <!-- sidebar-->
    <section class="sidebar">
@@ -14,24 +17,23 @@
       </div>
       <!-- sidebar menu-->
       <ul class="sidebar-menu" data-widget="tree">
-         <li>
+         <li class="{{($c_route == 'dashboard') ? 'active' : ''}}">
             <a href="{{route('dashboard')}}" ajax_load>
             <i data-feather="pie-chart"></i>
             <span>Dashboard</span>
             </a>
          </li>
-         <li class="treeview">
-            <a href="#">
-            <i data-feather="message-circle"></i>
-            <span>Application</span>
-            <span class="pull-right-container">
-            <i class="fa fa-angle-right pull-right"></i>
-            </span>
+         <li class="{{($c_route == 'all_brands') ? 'active' : ''}}">
+            <a href="{{route('all_brands')}}">
+            <i data-feather="pie-chart"></i>
+            <span>Brands</span>
             </a>
-            <ul class="treeview-menu">
-               <li><a href="chat.html"><i class="ti-more"></i>Chat</a></li>
-               <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
-            </ul>
+         </li>
+         <li class="{{($c_route == 'all_categories') ? 'active' : ''}}">
+            <a href="{{route('all_categories')}}">
+            <i data-feather="pie-chart"></i>
+            <span>Categories</span>
+            </a>
          </li>
          <li class="treeview">
             <a href="#">

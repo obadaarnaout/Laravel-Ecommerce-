@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\admin\AdminProfileController;
-use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\admin\AllBrandsController;
+use App\Http\Controllers\admin\CategoryController;
 
 
 /*
@@ -33,11 +34,26 @@ require __DIR__.'/auth.php';
 // admin route
 Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->middleware(['auth'])->name('admin.logout');
 Route::get('dashboard', [AdminProfileController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
-Route::get('admin/profile/{id}', [AdminProfileController::class, 'AdminProfile'])->middleware(['auth']);
-Route::get('admin/edit_profile/{id}', [AdminProfileController::class, 'EditAdminProfile'])->middleware(['auth']);
-Route::post('admin/update_profile/{id}', [AdminProfileController::class, 'UpdateAdminProfile'])->middleware(['auth']);
-Route::get('admin/change_password/{id}', [AdminProfileController::class, 'ChangeAdminPassword'])->middleware(['auth']);
-Route::post('admin/update_password', [AdminProfileController::class, 'UpdateAdminPassword'])->middleware(['auth']);
+
+Route::prefix('admin')->group(function () {
+	Route::get('/profile/{id}', [AdminProfileController::class, 'AdminProfile'])->middleware(['auth']);
+	Route::get('/edit_profile/{id}', [AdminProfileController::class, 'EditAdminProfile'])->middleware(['auth']);
+	Route::post('/update_profile/{id}', [AdminProfileController::class, 'UpdateAdminProfile'])->middleware(['auth']);
+	Route::get('/change_password/{id}', [AdminProfileController::class, 'ChangeAdminPassword'])->middleware(['auth']);
+	Route::post('/update_password', [AdminProfileController::class, 'UpdateAdminPassword'])->middleware(['auth']);
+	Route::get('/all_brands', [AllBrandsController::class, 'all_brands'])->middleware(['auth'])->name('all_brands');
+	Route::post('/add_brand', [AllBrandsController::class, 'add_brand'])->middleware(['auth'])->name('add_brand');
+	Route::get('/edit_brand/{id}', [AllBrandsController::class, 'edit_brand'])->middleware(['auth'])->name('edit_brand');
+	Route::post('/update_brand/{id}', [AllBrandsController::class, 'update_brand'])->middleware(['auth'])->name('update_brand');
+	Route::get('/delete_brand/{id}', [AllBrandsController::class, 'delete_brand'])->middleware(['auth'])->name('delete_brand');
+
+	Route::get('/all_categories', [CategoryController::class, 'all_categories'])->middleware(['auth'])->name('all_categories');
+	Route::post('/add_category', [CategoryController::class, 'add_category'])->middleware(['auth'])->name('add_category');
+	Route::get('/edit_category/{id}', [CategoryController::class, 'edit_category'])->middleware(['auth'])->name('edit_category');
+	Route::post('/update_category/{id}', [CategoryController::class, 'update_category'])->middleware(['auth'])->name('update_category');
+	Route::get('/delete_category/{id}', [CategoryController::class, 'delete_category'])->middleware(['auth'])->name('delete_category');
+});
+
 
 
 // user route
