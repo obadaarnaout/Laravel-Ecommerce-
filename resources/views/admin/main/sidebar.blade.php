@@ -35,6 +35,12 @@ $c_route = Route::getCurrentRoute()->getName();
             <span>Categories</span>
             </a>
          </li>
+         <li class="{{($c_route == 'all_sub_categories') ? 'active' : ''}}">
+            <a href="{{route('all_sub_categories')}}">
+            <i data-feather="pie-chart"></i>
+            <span>Sub Categories</span>
+            </a>
+         </li>
          <li class="treeview">
             <a href="#">
             <i data-feather="mail"></i> <span>Mailbox</span>

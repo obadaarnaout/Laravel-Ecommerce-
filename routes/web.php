@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\admin\AdminProfileController;
 use App\Http\Controllers\admin\AllBrandsController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\SubCategoriesController;
 
 
 /*
@@ -52,6 +53,12 @@ Route::prefix('admin')->group(function () {
 	Route::get('/edit_category/{id}', [CategoryController::class, 'edit_category'])->middleware(['auth'])->name('edit_category');
 	Route::post('/update_category/{id}', [CategoryController::class, 'update_category'])->middleware(['auth'])->name('update_category');
 	Route::get('/delete_category/{id}', [CategoryController::class, 'delete_category'])->middleware(['auth'])->name('delete_category');
+
+	Route::get('/sub/all_categories', [SubCategoriesController::class, 'all_categories'])->middleware(['auth'])->name('all_sub_categories');
+	Route::post('/sub/add_category', [SubCategoriesController::class, 'add_category'])->middleware(['auth'])->name('add_sub_category');
+	Route::get('/sub/edit_category/{id}', [SubCategoriesController::class, 'edit_category'])->middleware(['auth'])->name('edit_sub_category');
+	Route::post('/sub/update_category/{id}', [SubCategoriesController::class, 'update_category'])->middleware(['auth'])->name('update_sub_category');
+	Route::get('/sub/delete_category/{id}', [SubCategoriesController::class, 'delete_category'])->middleware(['auth'])->name('delete_sub_category');
 });
 
 
