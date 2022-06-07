@@ -14,6 +14,9 @@ class CategoryController extends Controller
 {
     public function all_categories()
     {
+        if (Auth::user()->admin != 1) {
+            return view('dashboard');
+        }
         $categories = Categories::latest()->get();
         return view('admin.categories.all_categories',compact('categories'));
     }

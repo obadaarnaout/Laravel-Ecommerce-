@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminProfileController;
 use App\Http\Controllers\admin\AllBrandsController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoriesController;
+use App\Http\Controllers\admin\ProductController;
 
 
 /*
@@ -59,6 +60,9 @@ Route::prefix('admin')->group(function () {
 	Route::get('/sub/edit_category/{id}', [SubCategoriesController::class, 'edit_category'])->middleware(['auth'])->name('edit_sub_category');
 	Route::post('/sub/update_category/{id}', [SubCategoriesController::class, 'update_category'])->middleware(['auth'])->name('update_sub_category');
 	Route::get('/sub/delete_category/{id}', [SubCategoriesController::class, 'delete_category'])->middleware(['auth'])->name('delete_sub_category');
+
+	Route::get('/add_product', [ProductController::class, 'add_product'])->middleware(['auth'])->name('add_product');
+	Route::post('/add_new_product', [ProductController::class, 'add_new_product'])->middleware(['auth'])->name('add_new_product');
 });
 
 
