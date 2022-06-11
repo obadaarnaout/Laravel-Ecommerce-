@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\AllBrandsController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoriesController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\user\HomeController;
 
 
 /*

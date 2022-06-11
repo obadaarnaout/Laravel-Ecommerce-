@@ -16,11 +16,55 @@
                         <form novalidate id="add_product_form" enctype="multipart/form-data" method="POST">
                            <div id="add_product_form_alert"></div>
                            <div class="row">
-                              <div class="col-12">
+                              <div class="col-6">
                                  <div class="form-group">
                                     <h5>Product Name <span class="text-danger">*</span></h5>
                                     <div class="controls">
                                        <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required" value=""> 
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-6">
+                                 <div class="form-group">
+                                    <h5>Brands <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                       <select name="brand" class="form-control" required>
+                                          @foreach($brands as $key => $brand)
+                                          <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                          @endforeach
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-6">
+                                 <div class="form-group">
+                                    <h5>Categories <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                       <select name="category" class="form-control" required>
+                                          @foreach($categories as $key => $category)
+                                          <option value="{{$category->id}}">{{$category->name}}</option>
+                                          @endforeach
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-6">
+                                 <div class="form-group">
+                                    <h5>Sub Categories <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                       <select name="sub_category" class="form-control" required>
+                                          @foreach($subCategories as $key => $sub)
+                                          <option value="{{$sub->id}}">{{$sub->name}}</option>
+                                          @endforeach
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-12">
+                                 <div class="form-group">
+                                    <h5>Product Description <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                       <textarea name="description" class="form-control" required></textarea>
                                     </div>
                                  </div>
                                  <div class="form-group">

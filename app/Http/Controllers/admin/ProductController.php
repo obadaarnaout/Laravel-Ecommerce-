@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Image;
 use DB;
 use File;
+use App\Models\Brands;
+use App\Models\Categories;
+use App\Models\SubCategory;
 
 class ProductController extends Controller
 {
@@ -18,7 +21,10 @@ class ProductController extends Controller
         if (Auth::user()->admin != 1) {
             return view('dashboard');
         }
-        return view('admin.products.add_product');
+        $brands = Brands::latest()->get();
+        $categories = Categories::latest()->get();
+        $subCategories = SubCategory::latest()->get();
+        return view('admin.products.add_product',compact('brands','categories','subCategories'));
     }
 
     public function add_new_product(Request $request)
