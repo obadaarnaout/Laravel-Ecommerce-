@@ -40,7 +40,7 @@
                                  <div class="form-group">
                                     <h5>Categories <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                       <select name="category" class="form-control" required>
+                                       <select name="category" class="form-control" required id="category">
                                           @foreach($categories as $key => $category)
                                           <option value="{{$category->id}}">{{$category->name}}</option>
                                           @endforeach
@@ -52,9 +52,13 @@
                                  <div class="form-group">
                                     <h5>Sub Categories <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                       <select name="sub_category" class="form-control" required>
-                                          @foreach($subCategories as $key => $sub)
-                                          <option value="{{$sub->id}}">{{$sub->name}}</option>
+                                       <select name="sub_category" class="form-control" required id="sub_category">
+                                          @foreach($categories as $key => $category)
+                                          <optgroup class="sub_{{$category->id}}" required>
+                                             @foreach($category->sub_category as $key => $sub_category)
+                                             <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>
+                                             @endforeach
+                                          </optgroup>
                                           @endforeach
                                        </select>
                                     </div>
@@ -98,6 +102,15 @@
    </div>
 <!-- /.content-wrapper -->
 <script type="text/javascript">
+   $('#sub_category').find('optgroup').hide(); // initialize
+   $('#category').change(function() {
+    var $cat = $(this).find('option:selected');
+    var $subCat = $('#sub_category').find('.sub_' + $cat.val());
+    $('#sub_category').find('optgroup').not("'"+ '.sub_' + $cat.val() + "'").hide(); // hide other optgroup
+    $subCat.show();
+    $subCat.find('option').removeAttr('selected');
+    $subCat.find('option').first().attr('selected', 'selected');
+   });
    $(document).ready(function() {
       $('#add_product_form').ajaxForm({
          url: "{{url('/admin/add_new_product')}}",

@@ -22,7 +22,7 @@ class ProductController extends Controller
             return view('dashboard');
         }
         $brands = Brands::latest()->get();
-        $categories = Categories::latest()->get();
+        $categories = Categories::latest()->with('sub_category')->get();
         $subCategories = SubCategory::latest()->get();
         return view('admin.products.add_product',compact('brands','categories','subCategories'));
     }
