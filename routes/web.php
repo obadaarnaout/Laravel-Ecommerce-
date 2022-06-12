@@ -64,6 +64,10 @@ Route::prefix('admin')->group(function () {
 
 	Route::get('/add_product', [ProductController::class, 'add_product'])->middleware(['auth'])->name('add_product');
 	Route::post('/add_new_product', [ProductController::class, 'add_new_product'])->middleware(['auth'])->name('add_new_product');
+	Route::get('/products', [ProductController::class, 'all_products'])->middleware(['auth'])->name('all_products');
+	Route::get('/delete_product/{id}', [ProductController::class, 'delete_product'])->middleware(['auth'])->name('delete_product');
+	Route::get('/edit_product/{id}', [ProductController::class, 'edit_product'])->middleware(['auth'])->name('edit_product');
+	Route::post('/update_product/{id}', [ProductController::class, 'update_product'])->middleware(['auth'])->name('update_product');
 });
 
 

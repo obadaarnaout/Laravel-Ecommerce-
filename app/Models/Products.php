@@ -25,6 +25,6 @@ class Products extends Model
     }
     public function media()
     {
-        return $this->belongsTo(Media::class,'id','product_id');
+        return $this->hasMany(Media::class,'product_id','id');
     }
 }

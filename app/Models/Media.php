@@ -10,4 +10,9 @@ class Media extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function media()
+    {
+        return $this->belongsTo(Products::class,'product_id','id');
+    }
 }
