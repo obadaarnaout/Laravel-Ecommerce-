@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function add_product()
     {
         if (Auth::user()->admin != 1) {
-            return view('dashboard');
+            return redirect('dashboard');
         }
         $brands = Brands::latest()->get();
         $categories = Categories::latest()->with('sub_category')->get();
@@ -79,7 +79,7 @@ class ProductController extends Controller
     public function all_products()
     {
         if (Auth::user()->admin != 1) {
-            return view('dashboard');
+            return redirect('dashboard');
         }
         $products = Products::latest()->get();
         return view('admin.products.all_products',compact('products'));
@@ -88,12 +88,15 @@ class ProductController extends Controller
     public function delete_product($id)
     {
         if (Auth::user()->admin != 1) {
-            return view('dashboard');
+            return redirect('dashboard');
         }
         if (empty($id) || !is_numeric($id)) {
-            return view('dashboard');
+            return redirect('dashboard');
         }
         $product = Products::find($id);
+        if (empty($product)) {
+            return redirect('dashboard');
+        }
 
         if(File::exists($product->thumb)) {
             File::delete($product->thumb);
@@ -111,10 +114,10 @@ class ProductController extends Controller
     public function edit_product($id)
     {
         if (Auth::user()->admin != 1) {
-            return view('dashboard');
+            return redirect('dashboard');
         }
         if (empty($id) || !is_numeric($id)) {
-            return view('dashboard');
+            return redirect('dashboard');
         }
         $brands = Brands::latest()->get();
         $categories = Categories::latest()->with('sub_category')->get();

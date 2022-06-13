@@ -53,6 +53,12 @@ $c_route = Route::getCurrentRoute()->getName();
                <li><a href="mailbox_compose.html"><i class="ti-more"></i>Manage Products</a></li>
             </ul>
          </li>
+         <li class="{{($c_route == 'sliders') ? 'active' : ''}}">
+            <a href="{{route('sliders')}}">
+            <i data-feather="pie-chart"></i>
+            <span>Sliders</span>
+            </a>
+         </li>
          <li class="treeview">
             <a href="#">
             <i data-feather="file"></i>
