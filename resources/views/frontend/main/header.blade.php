@@ -5,12 +5,19 @@
          <div class="header-top-inner">
             <div class="cnt-account">
                <ul class="list-unstyled">
-                  <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                  <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                  <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                  <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-                  <li><a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login</a></li>
-                  <li><a href="{{route('register')}}"><i class="icon fa fa-lock"></i>Register</a></li>
+                  <li><a href="#"><i class="icon fa fa-user"></i>{{_TR_('My Account')}}</a></li>
+                  <li><a href="#"><i class="icon fa fa-heart"></i>{{_TR_('Wishlist')}}</a></li>
+                  <li><a href="#"><i class="icon fa fa-shopping-cart"></i>{{_TR_('My Cart')}}</a></li>
+                  <li><a href="#"><i class="icon fa fa-check"></i>{{_TR_('Checkout')}}</a></li>
+                  @if(Auth::check() && Auth::user()->admin == 1)
+                  <li><a href="{{route('dashboard')}}"><i class="icon fa fa-user"></i>{{_TR_('Admin Panel')}}</a></li>
+                  @endif
+                  @if(!Auth::check())
+                  <li><a href="{{route('login')}}"><i class="icon fa fa-lock"></i>{{_TR_('Login')}}</a></li>
+                  <li><a href="{{route('register')}}"><i class="icon fa fa-lock"></i>{{_TR_('Register')}}</a></li>
+                  @else
+                  <li><a href="{{route('logout')}}"><i class="icon fa fa-lock"></i>{{_TR_('Logout')}}</a></li>
+                  @endif
                </ul>
             </div>
             <!-- /.cnt-account -->
@@ -25,11 +32,10 @@
                      </ul>
                   </li>
                   <li class="dropdown dropdown-small">
-                     <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+                     <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">{{GetCurrentLang()}} </span><b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">French</a></li>
-                        <li><a href="#">German</a></li>
+                        <li><a href="{{route('update_lang','english')}}">English</a></li>
+                        <li><a href="{{route('update_lang','arabic')}}">Arabic</a></li>
                      </ul>
                   </li>
                </ul>

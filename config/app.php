@@ -213,5 +213,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
+    'default_language' => env('DEFAULT_LANGUAGE','english'),
 
 ];

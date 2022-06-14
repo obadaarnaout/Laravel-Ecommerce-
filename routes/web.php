@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoriesController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SlidersController;
+use App\Http\Controllers\admin\TranslateController;
 use App\Http\Controllers\user\HomeController;
 
 
@@ -38,6 +39,7 @@ require __DIR__.'/auth.php';
 // admin route
 Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->middleware(['auth'])->name('admin.logout');
 Route::get('dashboard', [AdminProfileController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/update_lang/{lang}', [TranslateController::class, 'update_current_lang'])->name('update_lang');
 
 Route::prefix('admin')->group(function () {
 	Route::get('/profile/{id}', [AdminProfileController::class, 'AdminProfile'])->middleware(['auth','admin']);

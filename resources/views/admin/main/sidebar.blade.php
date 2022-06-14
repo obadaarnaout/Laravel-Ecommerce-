@@ -6,7 +6,7 @@ $c_route = Route::getCurrentRoute()->getName();
    <section class="sidebar">
       <div class="user-profile">
          <div class="ulogo">
-            <a href="{{route('dashboard')}}">
+            <a href="{{url('')}}">
                <!-- logo for regular state and mobile devices -->
                <div class="d-flex align-items-center justify-content-center">
                   <img src="{{ asset('') }}backend/images/logo-dark.png" alt="">
