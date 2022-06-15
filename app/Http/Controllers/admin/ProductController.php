@@ -190,4 +190,17 @@ class ProductController extends Controller
         return response()->json(['status' => 200,
                                  'message' => 'Product edited']);
     }
+
+    public function show_product($id)
+    {
+        if (empty($id) || !is_numeric($id)) {
+            return redirect('/');
+        }
+        $product = Products::find($id);
+        if (empty($product)) {
+            return redirect('/');
+        }
+
+        return view('frontend.product.show',compact('product'));
+    }
 }

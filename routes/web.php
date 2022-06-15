@@ -9,7 +9,8 @@ use App\Http\Controllers\admin\SubCategoriesController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SlidersController;
 use App\Http\Controllers\admin\TranslateController;
-use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\CardController;
 
 
 /*
@@ -81,7 +82,8 @@ Route::prefix('admin')->group(function () {
 
 	
 });
-
+Route::get('/product/{id}', [ProductController::class, 'show_product'])->name('show_product');
+Route::post('/add_to_card', [CardController::class, 'add_to_card'])->name('add_to_card');
 
 
 // user route

@@ -112,4 +112,14 @@
          </div>
       </div>
    </div>
+   <script type="text/javascript">
+      function AddToCard(id) {
+         $.post( "{{route('add_to_card')}}",{id,id,_token:"{{ csrf_token() }}"}, function(data) {
+            alert( "success" );
+         })
+         .fail(function(data) {
+            alert( "error" );
+         })
+      }
+   </script>
 </footer>
