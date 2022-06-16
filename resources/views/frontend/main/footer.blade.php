@@ -113,13 +113,53 @@
       </div>
    </div>
    <script type="text/javascript">
-      function AddToCard(id) {
-         $.post( "{{route('add_to_card')}}",{id,id,_token:"{{ csrf_token() }}"}, function(data) {
-            alert( "success" );
+      function GetCart() {
+         $.get( "{{url('/get_cart')}}", function(data) {
+            $('.total_price').html(data.total_price);
+            let html = '';
+            data.cart.forEach(function(item) {
+               html += `<div class="row"><div class="col-xs-4"><div class="image"> <a href="{{url('/product')}}/${item.product.id}"><img src="{{url('/')}}/${item.product.thumb}" alt=""></a> </div></div><div class="col-xs-7"><h3 class="name"><a href="{{url('/product')}}/${item.product.id}">${item.product.name}</a></h3><div class="price">${item.product.price}</div></div><div class="col-xs-1 action"> <a href="javascript:void(0)" onclick="RemoveFromCart('${item.id}')"><i class="fa fa-trash"></i></a> </div></div>`
+            });
+            $('.all_cart').html(html)
+            $('.total_count').html(data.cart_count);
          })
          .fail(function(data) {
-            alert( "error" );
+            toastr.error(data.responseJSON.message);
          })
       }
+      
+      function RemoveFromCart(id) {
+         $.get( "{{url('/remove_from_cart/')}}/"+id, function(data) {
+            $('.total_price').html(data.total_price);
+            let html = '';
+            data.cart.forEach(function(item) {
+               html += `<div class="row"><div class="col-xs-4"><div class="image"> <a href="{{url('/product')}}/${item.product.id}"><img src="{{url('/')}}/${item.product.thumb}" alt=""></a> </div></div><div class="col-xs-7"><h3 class="name"><a href="{{url('/product')}}/${item.product.id}">${item.product.name}</a></h3><div class="price">${item.product.price}</div></div><div class="col-xs-1 action"> <a href="javascript:void(0)" onclick="RemoveFromCart('${item.id}')"><i class="fa fa-trash"></i></a> </div></div>`
+            });
+            $('.all_cart').html(html)
+            $('.total_count').html(data.cart_count);
+            toastr.success(data.message);
+         })
+         .fail(function(data) {
+            toastr.error(data.responseJSON.message);
+         })
+      }
+      function AddToCard(id) {
+         $.post( "{{route('add_to_cart')}}",{id,id,_token:"{{ csrf_token() }}"}, function(data) {
+            $('.total_price').html(data.total_price);
+            let html = '';
+            data.cart.forEach(function(item) {
+               html += `<div class="row"><div class="col-xs-4"><div class="image"> <a href="{{url('/product')}}/${item.product.id}"><img src="{{url('/')}}/${item.product.thumb}" alt=""></a> </div></div><div class="col-xs-7"><h3 class="name"><a href="{{url('/product')}}/${item.product.id}">${item.product.name}</a></h3><div class="price">${item.product.price}</div></div><div class="col-xs-1 action"> <a href="javascript:void(0)" onclick="RemoveFromCart('${item.id}')"><i class="fa fa-trash"></i></a> </div></div>`
+            });
+            $('.all_cart').html(html)
+            $('.total_count').html(data.cart_count);
+            toastr.success(data.message);
+         })
+         .fail(function(data) {
+            toastr.error(data.responseJSON.message);
+         })
+      }
+      setTimeout(function () {
+         GetCart();
+      },1000);
    </script>
 </footer>

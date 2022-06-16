@@ -11,6 +11,9 @@ use File;
 use Carbon\Carbon;
 use App\Models\Sliders;
 use App\Models\Products;
+use App\Models\Categories;
+use App\Models\Brands;
+use App\Models\Cart;
 
 class HomeController extends Controller
 {
@@ -18,6 +21,19 @@ class HomeController extends Controller
     {
         $sliders = Sliders::latest()->get();
         $products = Products::latest()->get();
-        return view('frontend/home',compact('sliders','products'));
+        $categories = Categories::latest()->get();
+        $brands = Brands::latest()->get();
+        $CartCount = 0;
+        $CartSum = 0;
+        $Cart = null;
+        if (Auth::check()) {
+            $CartCount = Cart::where('user_id',Auth::user()->id)->count();
+            $Cart = Cart::where('user_id',Auth::user()->id)->latest()->get();
+            foreach ($Cart as $key => $value) {
+                $CartSum += $value->product->price;
+            }
+        }
+        
+        return view('frontend/home',compact('sliders','products','categories','brands','Cart','CartCount','CartSum'));
     }
 }

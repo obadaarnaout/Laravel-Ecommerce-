@@ -200,7 +200,8 @@ class ProductController extends Controller
         if (empty($product)) {
             return redirect('/');
         }
+        $brands = Brands::latest()->get();
 
-        return view('frontend.product.show',compact('product'));
+        return view('frontend.product.show',compact('product','brands'));
     }
 }
