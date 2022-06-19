@@ -93,7 +93,7 @@
                         <div class="clearfix cart-total">
                            <div class="pull-right"> <span class="text">Sub Total :</span><span class='price total_price'>$0</span> </div>
                            <div class="clearfix"></div>
-                           <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> 
+                           <a href="{{route('stripe_pay')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> 
                         </div>
                         <!-- /.cart-total--> 
                      </li>

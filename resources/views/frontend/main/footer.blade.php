@@ -113,9 +113,10 @@
       </div>
    </div>
    <script type="text/javascript">
+
       function GetCart() {
          $.get( "{{url('/get_cart')}}", function(data) {
-            $('.total_price').html(data.total_price);
+            $('.total_price').html('$'+data.total_price);
             let html = '';
             data.cart.forEach(function(item) {
                html += `<div class="row"><div class="col-xs-4"><div class="image"> <a href="{{url('/product')}}/${item.product.id}"><img src="{{url('/')}}/${item.product.thumb}" alt=""></a> </div></div><div class="col-xs-7"><h3 class="name"><a href="{{url('/product')}}/${item.product.id}">${item.product.name}</a></h3><div class="price">${item.product.price}</div></div><div class="col-xs-1 action"> <a href="javascript:void(0)" onclick="RemoveFromCart('${item.id}')"><i class="fa fa-trash"></i></a> </div></div>`
@@ -145,7 +146,7 @@
       }
       function AddToCard(id) {
          $.post( "{{route('add_to_cart')}}",{id,id,_token:"{{ csrf_token() }}"}, function(data) {
-            $('.total_price').html(data.total_price);
+            $('.total_price').html('$'+data.total_price);
             let html = '';
             data.cart.forEach(function(item) {
                html += `<div class="row"><div class="col-xs-4"><div class="image"> <a href="{{url('/product')}}/${item.product.id}"><img src="{{url('/')}}/${item.product.thumb}" alt=""></a> </div></div><div class="col-xs-7"><h3 class="name"><a href="{{url('/product')}}/${item.product.id}">${item.product.name}</a></h3><div class="price">${item.product.price}</div></div><div class="col-xs-1 action"> <a href="javascript:void(0)" onclick="RemoveFromCart('${item.id}')"><i class="fa fa-trash"></i></a> </div></div>`
@@ -159,6 +160,12 @@
          })
       }
       setTimeout(function () {
+         @if (Session::has('success'))
+         toastr.success("{{ Session::get('success') }}");
+         @endif
+         @if (Session::has('error'))
+         toastr.error("{{ Session::get('error') }}");
+         @endif
          GetCart();
       },1000);
    </script>

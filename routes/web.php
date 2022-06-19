@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\SlidersController;
 use App\Http\Controllers\admin\TranslateController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\StripeController;
 
 
 /*
@@ -86,6 +87,8 @@ Route::get('/product/{id}', [ProductController::class, 'show_product'])->name('s
 Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->middleware(['auth'])->name('add_to_cart');
 Route::get('/remove_from_cart/{id}', [CartController::class, 'remove_from_cart'])->middleware(['auth'])->name('remove_from_cart');
 Route::get('/get_cart', [CartController::class, 'get_cart'])->middleware(['auth'])->name('get_cart');
+Route::get('/stripe_pay', [StripeController::class, 'stripe_pay'])->middleware(['auth'])->name('stripe_pay');
+Route::get('/stripe_success', [StripeController::class, 'stripe_success'])->middleware(['auth'])->name('stripe_success');
 
 
 // user route
